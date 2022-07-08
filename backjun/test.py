@@ -1,18 +1,22 @@
-#제목: A-B
+import math
 
-# split()에 입력된 구분 구문을 보고 입력하세요 비어있으면 띄어쓰기 입니다.
-# split()은 인자 구분 기호입니다.
+T = int(input())
 
-# input을 엔터없이 어떻게 입력 할 수 있나 고민했는데 어렵게 생각하지 말고
-# 그냥 변수에 넣어서 값입력하고 사칙연상 수행후 결과를 출력하면 된다.
-print("숫자를 입력하세요: ")
+for _ in range(T):
+    x1, y1, r1, x2, y2, r2 = list(map(int, input().split()))
 
+    # 두 원의 중심 사이의 거리
+    dis = math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2)
 
-# a,b = map(int,input().split())
-a=5
-b=10
-
-print(a-b)
-print("===============================")
-
-
+    if dis == 0:  # 두 원의 중심이 같을 경우
+        if r1 == r2:  # 두 원의 크기가 같아 겹치는 경우
+            print(-1)
+        else:  # 한 원이 다른 원 안에 들어가 있는 경우
+            print(0)
+    else:  # 두 원의 중심이 다를 경우
+        if r1 + r2 == dis or abs(r2 - r1) == dis:
+            print(1)
+        elif ((abs(r1 - r2) < dis) and (dis < r1 + r2)):
+            print(2)
+        else:
+            print(0)
